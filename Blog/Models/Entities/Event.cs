@@ -16,5 +16,8 @@ namespace Blog.Models.Entities
 
 		public double? Latitude { get; set; }
 		public double? Longitude { get; set; }
+
+		public Post RelatedPost { get; set; }
+		public int? RelatedPostId { get; set; }
 	}
 }
