@@ -170,6 +170,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <Content Include="Global.asax" />
+    <None Include="compilerconfig.json" />
+    <Content Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -178,11 +182,28 @@
     <Content Include="Scripts\react\react-0.13.1.min.js" />
     <Content Include="Scripts\react\react-with-addons-0.13.1.js" />
     <Content Include="Scripts\react\react-with-addons-0.13.1.min.js" />
+    <Content Include="styles\app.css">
+      <DependentUpon>app.less</DependentUpon>
+    </Content>
+    <Content Include="styles\app.min.css">
+      <DependentUpon>app.css</DependentUpon>
+    </Content>
+    <Content Include="styles\reset.css">
+      <DependentUpon>reset.less</DependentUpon>
+    </Content>
+    <Content Include="styles\reset.min.css">
+      <DependentUpon>reset.css</DependentUpon>
+    </Content>
     <Content Include="Web.config" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="styles\app.less" />
+    <Content Include="styles\reset.less" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ReactConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -205,7 +226,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
