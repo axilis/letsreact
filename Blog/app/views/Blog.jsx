@@ -3,6 +3,16 @@ var Blog = React.createClass({
 
 	render: function () {
 
+		var posts = [];
+		for (var i = 0; i < 100; i++) {
+			posts.push(
+				<div className="post">
+					<h1>Post {i}</h1>
+					<div className="post-content">Post {i} text Lorem Ipsum</div>
+				</div>
+			);
+		}
+
 		return (
 			<div>
 				<header className="blog-header">
@@ -11,19 +21,9 @@ var Blog = React.createClass({
 				</header>
 
 				<div className="post-list">
-					<div className="post">
-						<h1>Post 1</h1>
-						<div className="post-content">Post 1 text Lorem Ipsum</div>
-					</div>
-					<div className="post">
-						<h1>Post 2</h1>
-						<div className="post-content">Post 2 text Lorem Ipsum</div>
-					</div>
-					<div className="post">
-						<h1>Post 3</h1>
-						<div className="post-content">Post 3 text Lorem Ipsum</div>
-					</div>
+					{posts}
 				</div>
+
 				<footer className="blog-footer">Copyright &copy; 2015. Kornelije Petak</footer>
 			</div>
 		);
