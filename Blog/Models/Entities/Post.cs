@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Blog.Models.Entities
 {
@@ -17,5 +19,14 @@ namespace Blog.Models.Entities
 		public string ImageUrl { get; set; }
 
 		public string Tags { get; set; }
+
+		[NotMapped]
+		public string[] TagList
+		{
+			get
+			{
+				return Tags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToArray(); 
+			}
+		}
 	}
 }
