@@ -44,10 +44,14 @@ namespace Blog.Migrations
 				var selectedTags = string.Join(",", 
 					Enumerable.Range(0, tagCount).Select(_ => tags.ChooseAtRandom()).Distinct());
 
+				var title = string.Join(" ",
+					Enumerable.Range(0, Incident.Primitive.IntegerBetween(2, 5)).Select(_ => Incident.Text.Word));
+
 				context.Posts.Add(new Post()
 				{
 					Author = authors.ChooseAtRandom(),
-					Timestamp = Incident.Primitive.TimeBetween(start, end),
+					Title = title,
+                    Timestamp = Incident.Primitive.TimeBetween(start, end),
 					Text = sentences,
 					ImageUrl = Incident.Web.Url,
 					Tags = selectedTags

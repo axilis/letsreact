@@ -216,6 +216,10 @@
     <Compile Include="Migrations\201510130600228_Model.Designer.cs">
       <DependentUpon>201510130600228_Model.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510192003396_AddTitleToPost.cs" />
+    <Compile Include="Migrations\201510192003396_AddTitleToPost.Designer.cs">
+      <DependentUpon>201510192003396_AddTitleToPost.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entities\BlogDb.cs" />
     <Compile Include="Models\Entities\Comment.cs" />
@@ -241,6 +245,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201510130600228_Model.resx">
       <DependentUpon>201510130600228_Model.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510192003396_AddTitleToPost.resx">
+      <DependentUpon>201510192003396_AddTitleToPost.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
