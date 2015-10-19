@@ -5,7 +5,7 @@ var Blog = React.createClass({
 
 		var _this = this;
 
-		$.get("/Home/Posts")
+		$.get("/Home/Abstracts")
 		.done(function (data) {
 			_this.setState({ posts: data });
 		});
