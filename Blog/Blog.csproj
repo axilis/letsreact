@@ -162,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\views\Blog.jsx" />
+    <Content Include="app\views\BlogPost.jsx" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

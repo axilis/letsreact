@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,5 +14,12 @@ namespace Blog.Controllers
         {
             return View();
         }
+
+		[HttpGet]
+		public ActionResult Posts()
+		{
+			using (BlogDb db = new BlogDb())
+				return Json(db.Posts.ToList(), JsonRequestBehavior.AllowGet);
+		}
     }
 }

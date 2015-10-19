@@ -1,17 +1,27 @@
 ﻿
 var Blog = React.createClass({
 
+	componentDidMount: function () {
+
+		var _this = this;
+
+		$.get("/Home/Posts")
+		.done(function (data) {
+			_this.setState({ posts: data });
+		});
+	},
+
+	getInitialState: function () {
+		return {
+			posts: []
+		};
+	},
+
 	render: function () {
 
-		var posts = [];
-		for (var i = 0; i < 100; i++) {
-			posts.push(
-				<div className="post">
-					<h1>Post {i}</h1>
-					<div className="post-content">Post {i} text Lorem Ipsum</div>
-				</div>
-			);
-		}
+		var posts = this.state.posts.map(function(post) {
+			return <BlogPost title={post.Title} content={post.Text} />;
+		});
 
 		return (
 			<div>
