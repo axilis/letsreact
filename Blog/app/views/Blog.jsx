@@ -22,7 +22,10 @@ var Blog = React.createClass({
 		var searchTerm = e.target.value;
 
 		var displayed = this.state.posts.filter(function(post) {
-			return post.Text.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
+			return (
+				post.Text.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
+				|| post.Title.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0
+			);
 		});
 
 		this.setState({ displayed: displayed });
