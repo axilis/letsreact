@@ -1,25 +1,36 @@
 ﻿
 var Blog = React.createClass({
 
-	componentDidMount: function () {
+	componentDidMount: function() {
 
 		var _this = this;
 
 		$.get("/Home/Abstracts")
-		.done(function (data) {
-			_this.setState({ posts: data });
+		.done(function(data) {
+			_this.setState({ posts: data, displayed: data });
 		});
 	},
 
-	getInitialState: function () {
+	getInitialState: function() {
 		return {
-			posts: []
+			posts: [],
+			displayed: []
 		};
 	},
 
-	render: function () {
+	onSearch: function(e) {
+		var searchTerm = e.target.value;
 
-		var posts = this.state.posts.map(function(post) {
+		var displayed = this.state.posts.filter(function(post) {
+			return post.Text.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
+		});
+
+		this.setState({ displayed: displayed });
+	},
+
+	render: function() {
+
+		var posts = this.state.displayed.map(function(post) {
 			return <BlogPost key={post.Id} postId={post.Id} title={post.Title} abstract={post.Text} />;
 		});
 
@@ -30,7 +41,7 @@ var Blog = React.createClass({
 					<h2>because that's what you should do.</h2>
 
 					<div className="search-box">
-						Search: <input />
+						Search: <input onChange={this.onSearch} />
 					</div>
 
 				</header>
