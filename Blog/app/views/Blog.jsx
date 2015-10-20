@@ -28,6 +28,11 @@ var Blog = React.createClass({
 				<header className="blog-header">
 					<h1>Please React!</h1>
 					<h2>because that's what you should do.</h2>
+
+					<div className="search-box">
+						Search: <input />
+					</div>
+
 				</header>
 
 				<div className="post-list">
