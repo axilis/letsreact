@@ -20,7 +20,7 @@ var Blog = React.createClass({
 	render: function () {
 
 		var posts = this.state.posts.map(function(post) {
-			return <BlogPost key={post.Id} title={post.Title} content={post.Text} />;
+			return <BlogPost key={post.Id} postId={post.Id} title={post.Title} abstract={post.Text} />;
 		});
 
 		return (
