@@ -23,6 +23,13 @@ namespace Blog.Controllers
 		}
 
 		[HttpGet]
+		public ActionResult Post(int id)
+		{
+			using (BlogDb db = new BlogDb())
+				return Json(db.Posts.Find(id), JsonRequestBehavior.AllowGet);
+		}
+
+		[HttpGet]
 		public ActionResult Abstracts()
 		{
 			using (BlogDb db = new BlogDb())
