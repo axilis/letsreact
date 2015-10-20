@@ -37,11 +37,11 @@ namespace Blog.Migrations
 			for (int i = 0; i < 20; i++)
 			{
 				var sentenceCount = Incident.Primitive.IntegerBetween(5, 20);
-				var sentences = string.Join(" ", 
+				var sentences = string.Join(" ",
 					Enumerable.Range(0, sentenceCount).Select(_ => Incident.Text.Sentence));
 
 				int tagCount = Incident.Primitive.IntegerBetween(0, 3);
-				var selectedTags = string.Join(",", 
+				var selectedTags = string.Join(",",
 					Enumerable.Range(0, tagCount).Select(_ => tags.ChooseAtRandom()).Distinct());
 
 				var title = string.Join(" ",
@@ -51,11 +51,26 @@ namespace Blog.Migrations
 				{
 					Author = authors.ChooseAtRandom(),
 					Title = title,
-                    Timestamp = Incident.Primitive.TimeBetween(start, end),
+					Timestamp = Incident.Primitive.TimeBetween(start, end),
 					Text = sentences,
 					ImageUrl = Incident.Web.Url,
 					Tags = selectedTags
 				});
+			}
+
+			foreach (var post in context.Posts.Local)
+			{
+				var commentCount = Incident.Primitive.IntegerBetween(0, 8);
+
+				context.Comments.AddRange(
+					Enumerable.Range(0, commentCount).Select(day => new Comment()
+					{
+						Post = post,
+						Author = Incident.Human.FullName,
+						Timestamp = Incident.Primitive.TimeBetween(post.Timestamp.AddDays(day), post.Timestamp.AddDays(day + 1)),
+						Text = Incident.Text.Paragraph
+					})
+				);
 			}
 		}
 	}
