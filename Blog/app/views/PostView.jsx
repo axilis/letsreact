@@ -12,8 +12,8 @@ var PostView = React.createClass({
 	},
 
 	componentDidMount: function() {
-		$.get("/Home/Post/" + this.props.postId).
-		done(function(post) {
+		$.get("/Home/Post/" + this.props.postId)
+		.done(function(post) {
 			this.setState({ post: post });
 		}.bind(this));
 	},
