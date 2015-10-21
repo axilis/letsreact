@@ -20,12 +20,21 @@ namespace Blog.Models.Entities
 
 		public string Tags { get; set; }
 
+
+		[NotMapped]
+		public string PostTime
+		{
+			get
+			{
+				return Timestamp.ToString("yyyy-MM-dd HH:mm");
+			}
+		}
 		[NotMapped]
 		public string[] TagList
 		{
 			get
 			{
-				return Tags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToArray(); 
+				return Tags.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
 			}
 		}
 	}

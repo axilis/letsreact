@@ -7,7 +7,7 @@ var BlogPost = React.createClass({
 		postId: React.PropTypes.number.isRequired
 	},
 
-	getInitialState: function () {
+	getInitialState: function() {
 		return {
 			expanded: false,
 			content: this.props.abstract
@@ -17,14 +17,18 @@ var BlogPost = React.createClass({
 	readMoreClicked: function() {
 
 		$.get("/Home/Post/" + this.props.postId)
-		.done(function (post) {
+		.done(function(post) {
 
 			this.setState({ content: post.Text, expanded: true });
 
 		}.bind(this));
 	},
 
-	render: function () {
+	titleClicked: function() {
+		D.publish("post", this.props.postId);
+	},
+
+	render: function() {
 
 		var readMore = this.state.expanded
 		? null
@@ -32,7 +36,7 @@ var BlogPost = React.createClass({
 
 		return (
 			<div className="post">
-				<h1>{this.props.title}</h1>
+				<h1 onClick={this.titleClicked}>{this.props.title}</h1>
 				<div className="post-content">
 					{this.state.content}
 					{readMore}

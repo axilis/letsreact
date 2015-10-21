@@ -9,12 +9,17 @@ var Blog = React.createClass({
 		.done(function(data) {
 			_this.setState({ posts: data, displayed: data });
 		});
+
+		this.postEventToken = D.subscribe("post", function(postId) {
+			this.setState({ postId: postId });
+		}.bind(this));
 	},
 
 	getInitialState: function() {
 		return {
 			posts: [],
-			displayed: []
+			displayed: [],
+			postId: null
 		};
 	},
 
@@ -33,25 +38,37 @@ var Blog = React.createClass({
 
 	render: function() {
 
-		var posts = this.state.displayed.map(function(post) {
-			return <BlogPost key={post.Id} postId={post.Id} title={post.Title} abstract={post.Text} />;
-		});
+		var content = null;
+		var search = null;
 
+		if (this.state.postId === null)
+		{
+			var posts = this.state.displayed.map(function(post) {
+				return <BlogPost key={post.Id} postId={post.Id} title={post.Title} abstract={post.Text} />;
+			});
+
+			content = <div className="post-list">{posts}</div>;
+
+			search = (
+				<div className="search-box">
+					Search: <input onChange={this.onSearch} />
+				</div>
+			);
+		}
+		else {
+			content = <PostView postId={this.state.postId} />;
+		}
+
+		
 		return (
 			<div>
 				<header className="blog-header">
 					<h1>Please React!</h1>
 					<h2>because that's what you should do.</h2>
-
-					<div className="search-box">
-						Search: <input onChange={this.onSearch} />
-					</div>
-
+					{search}
 				</header>
 
-				<div className="post-list">
-					{posts}
-				</div>
+				{content}
 
 				<footer className="blog-footer">Copyright &copy; 2015. Kornelije Petak</footer>
 			</div>
