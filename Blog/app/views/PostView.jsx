@@ -28,18 +28,28 @@ var PostView = React.createClass({
 		D.publish("post", null);
 	},
 
+	onMouseEnterTitle: function() {
+		this.timer = setTimeout(function() {
+			this.refs.commentsExpander.expand(true);
+		}.bind(this), 1500);
+	},
+
+	onMouseExitTitle: function() {
+		clearTimeout(this.timer);
+	},
+
 	render: function() {
 
 		if (this.state.post === null)
 			return <div>Loading...</div>;
 
 		var comments = this.state.post.Comments.map(function(comment) {
-			return <Comment comment={comment} />
+			return <Comment key={comment.Id} comment={comment} />
 		});
 
 		return (
 			<div className="post-view">
-				<h1>{this.state.post.Title}</h1>
+				<h1 onMouseOver={this.onMouseEnterTitle} onMouseOut={this.onMouseExitTitle}>{this.state.post.Title}</h1>
 				<h2>{this.state.post.Author}</h2>
 				<h2>{this.state.post.PostTime}</h2>
 				<div className="post-content">
@@ -47,7 +57,7 @@ var PostView = React.createClass({
 				</div>
 				<div className="back-link" onClick={this.goBack}>Back to posts</div>
 
-				<Expander title="Comments" style={{ marginTop: 20, marginBottom: 7 }}>
+				<Expander ref="commentsExpander" title="Comments" style={{ marginTop: 20, marginBottom: 7 }}>
 					{comments}
 					{this.renderEditor()}
 				</Expander>

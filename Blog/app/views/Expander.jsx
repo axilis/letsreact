@@ -12,7 +12,11 @@ var Expander = React.createClass({
 	},
 
 	onClick: function() {
-		this.setState({ expanded: !this.state.expanded });
+		this.expand(!this.state.expanded);
+	},
+
+	expand: function(expanded) {
+		this.setState({ expanded: expanded });
 	},
 
 	render: function() {
