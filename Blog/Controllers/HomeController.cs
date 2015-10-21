@@ -1,5 +1,6 @@
 ﻿using Blog.Models.Entities;
 using System;
+using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,13 +8,13 @@ using System.Web.Mvc;
 
 namespace Blog.Controllers
 {
-    public class HomeController : Controller
-    {
-        // GET: Home
-        public ActionResult Index()
-        {
-            return View();
-        }
+	public class HomeController : Controller
+	{
+		// GET: Home
+		public ActionResult Index()
+		{
+			return View();
+		}
 
 		[HttpGet]
 		public ActionResult Posts()
@@ -26,7 +27,14 @@ namespace Blog.Controllers
 		public ActionResult Post(int id)
 		{
 			using (BlogDb db = new BlogDb())
-				return Json(db.Posts.Find(id), JsonRequestBehavior.AllowGet);
+			{
+				Post post = db.Posts.Include(p => p.Comments).FirstOrDefault(p => p.Id == id);
+
+				// Prevent circular references
+				post.Comments.ForEach(c => c.Post = null);
+
+				return Json(post, JsonRequestBehavior.AllowGet);
+			}
 		}
 
 		[HttpGet]
@@ -42,7 +50,7 @@ namespace Blog.Controllers
 					item.Text += ".";
 				}
 
-                return Json(list, JsonRequestBehavior.AllowGet);
+				return Json(list, JsonRequestBehavior.AllowGet);
 			}
 		}
 	}

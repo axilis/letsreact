@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace Blog.Models.Entities
 {
@@ -20,6 +21,7 @@ namespace Blog.Models.Entities
 
 		public string Tags { get; set; }
 
+		public List<Comment> Comments { get; set; }
 
 		[NotMapped]
 		public string PostTime
