@@ -164,6 +164,7 @@
     <Content Include="app\views\Blog.jsx" />
     <Content Include="app\views\BlogPost.jsx" />
     <Content Include="app\views\PostView.jsx" />
+    <Content Include="app\views\Comment.jsx" />
     <None Include="ClearScript.V8\ClearScriptV8-32.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

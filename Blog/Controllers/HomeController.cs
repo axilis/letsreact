@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using IncidentCS;
+using System.Globalization;
 
 namespace Blog.Controllers
 {
@@ -35,6 +37,22 @@ namespace Blog.Controllers
 
 				return Json(post, JsonRequestBehavior.AllowGet);
 			}
+		}
+
+		public ActionResult AddComment(Comment comment)
+		{
+			Incident.Culture = new CultureInfo("en-US");
+
+			using (BlogDb db = new BlogDb())
+			{
+				comment.Text += string.Format(" And then he was like: '{0}'.", Incident.Text.Sentence);
+
+				db.Comments.Add(comment);
+				comment.Timestamp = DateTime.Now;
+				db.SaveChanges();
+			}
+
+			return null;
 		}
 
 		[HttpGet]
