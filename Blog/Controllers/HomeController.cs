@@ -45,8 +45,6 @@ namespace Blog.Controllers
 
 			using (BlogDb db = new BlogDb())
 			{
-				comment.Text += string.Format(" And then he was like: '{0}'.", Incident.Text.Sentence);
-
 				db.Comments.Add(comment);
 				comment.Timestamp = DateTime.Now;
 				db.SaveChanges();
