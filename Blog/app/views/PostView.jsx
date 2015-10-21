@@ -47,9 +47,10 @@ var PostView = React.createClass({
 				</div>
 				<div className="back-link" onClick={this.goBack}>Back to posts</div>
 
-				<h2 style={{ marginTop: 20, marginBottom: 7 }}>Comments</h2>
-				{comments}
-				{this.renderEditor()}
+				<Expander title="Comments" style={{ marginTop: 20, marginBottom: 7 }}>
+					{comments}
+					{this.renderEditor()}
+				</Expander>
 			</div>
 		);
 	},
